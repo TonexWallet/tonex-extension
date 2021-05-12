@@ -72,7 +72,7 @@ const CreateTransactionScreen = () => {
         history.replace({
             pathname: '/wallet'
         });
-    }, [activeWallet.hdPath, executeBackground, formData]);
+    }, [history, activeWallet.hdPath, executeBackground, formData]);
 
     return (
         <>

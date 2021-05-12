@@ -35,9 +35,6 @@ const AmountInput = ({value, onChange}) => {
             startAdornment={(
                 <CrystalIcon/>
             )}
-            endAdornment={(
-                <div className={classes.maxAmountLabel}>max</div>
-            )}
         />
     )
 };
