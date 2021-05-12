@@ -9,10 +9,10 @@ export const useTon = () => {
 };
 
 export const AvailableNetworks = [
-    'rustnet.ton.dev',
-    'net.ton.dev',
     'main.ton.dev',
+    'net.ton.dev',
     'fld.ton.dev',
+    'rustnet.ton.dev',
 ];
 
 const TonProvider = ({children}) => {
