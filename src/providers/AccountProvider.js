@@ -44,9 +44,10 @@ const AccountProvider = ({children}) => {
         return await executeBackground(EVENT_TYPE.ACCOUNT_REMOVE);
     }, [executeBackground])
 
-    const getSeedPhrase = useCallback(async(passcode) => {
-        return await executeBackground(EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE, {
-            passcode
+    const getAccountSecret = useCallback(async({passcode, hdPath}) => {
+        return await executeBackground(EVENT_TYPE.ACCOUNT_GET_SECRET, {
+            passcode,
+            hdPath
         });
     }, [executeBackground]);
 
@@ -60,7 +61,7 @@ const AccountProvider = ({children}) => {
             lockAccount,
             unlockAccount,
             removeAccount,
-            getSeedPhrase
+            getAccountSecret
         }}>
             {account && children}
         </AccountProviderContext.Provider>

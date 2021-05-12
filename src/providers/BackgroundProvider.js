@@ -18,6 +18,7 @@ export const EVENT_TYPE = {
     ACCOUNT_REMOVE: 'account/remove',
     ACCOUNT_GENERATE_SEED_PHRASE: 'account/generateSeedPhrase',
     ACCOUNT_GET_SEED_PHRASE: 'account/getSeedPhrase',
+    ACCOUNT_GET_SECRET: 'account/getSecret',
     WALLET_CREATE: 'wallet/create',
     WALLET_ACTIVATE: 'wallet/activate',
     TRANSACTION_SEND: 'wallet/sendTransaction',

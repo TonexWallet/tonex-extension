@@ -5,7 +5,8 @@ import clsx from "clsx";
 const useStyles = makeStyles({
     label: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: '100%'
     },
     labelContent: {
         display: 'flex',

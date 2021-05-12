@@ -11,7 +11,7 @@ import Button from "../Button";
 import Textarea from "../Textarea";
 import {useState} from 'react';
 import {useAccount} from "../../providers/AccountProvider";
-import useCopy from "@react-hook/copy";
+import {useWallets} from "../../providers/WalletsProvider";
 
 const useStyles = makeStyles({
     settingsScreen: {
@@ -30,16 +30,14 @@ const useStyles = makeStyles({
 
 const SettingsScreen = () => {
     const classes = useStyles();
-    const [seedPhrase, setSeedPhrase] = useState();
-    const {getSeedPhrase} = useAccount();
+    const [secrets, setSecrets] = useState({});
+    const {seedPhrase, secretKey} = secrets;
+    const {getAccountSecret} = useAccount();
+    const {activeWallet} = useWallets();
 
     const {showPrompt: showPasscode, hide: hidePasscode} = usePasscodePrompt();
     const [error, setError] = useState(null);
     const {network: activeNetwork, changeNetwork} = useTon();
-
-    const {copy} = useCopy(
-        seedPhrase
-    );
 
     return (
         <BaseScreen backAction={(
@@ -67,10 +65,21 @@ const SettingsScreen = () => {
 
 
                 <div className={classes.seedPhrase}>
-                    <Typography>Master Password</Typography>
+                    <Typography>Your Keys and Seed Phrase</Typography>
 
                     <br/>
-                    <Textarea readOnly={true} value={seedPhrase} placeholder={seedPhrase ? null : 'Locked'}/>
+
+                    <InputLabel label={'Public Key'}>
+                        <Textarea readOnly={true} value={activeWallet.publicKey}/>
+                    </InputLabel>
+
+                    <InputLabel label={'Secret Key'}>
+                        <Textarea readOnly={true} value={secretKey} placeholder={secretKey ? null : 'Locked'}/>
+                    </InputLabel>
+
+                    <InputLabel label={'Seed Phrase'}>
+                        <Textarea readOnly={true} value={seedPhrase} placeholder={seedPhrase ? null : 'Locked'}/>
+                    </InputLabel>
 
                     {error && (
                         <Typography variant={TypographyVariant.LABEL} color={TypographyColor.DANGER}>
@@ -78,34 +87,31 @@ const SettingsScreen = () => {
                         </Typography>
                     )}
 
+
                     <br/>
-                    {seedPhrase ? (
-                        <Button onClick={copy}>
-                            Copy Seed Phrase
-                        </Button>
-                    ) : (
-                        <Button onClick={() => {
-                            showPasscode({
-                                onChange: async (passcode) => {
-                                    setError(null);
 
-                                    try{
-                                        const {seedPhrase} = await getSeedPhrase(passcode);
+                    <Button onClick={() => {
+                        showPasscode({
+                            onChange: async (passcode) => {
+                                setError(null);
 
-                                        setSeedPhrase(seedPhrase);
-                                        hidePasscode();
-                                    }catch (e){
-                                        setError(e);
-                                    }
+                                try{
+                                    const secrets = await getAccountSecret({
+                                        passcode,
+                                        hdPath: activeWallet.hdPath
+                                    });
+
+                                    setSecrets(secrets);
+                                    hidePasscode();
+                                }catch (e){
+                                    setError(e);
                                 }
-                            });
-                        }}>
-                            Unlock Seed Phrase
-                        </Button>
-                    )}
-
+                            }
+                        });
+                    }}>
+                        Unlock Seed Phrase
+                    </Button>
                 </div>
-
             </div>
         </BaseScreen>
     )

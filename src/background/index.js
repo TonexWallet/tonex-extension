@@ -143,6 +143,7 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         return await Promise.all(paths.map(async hdPath => {
             const wallet = await deriveWalletAccountByPath(seedPhrase, hdPath);
             const address = await wallet.getAddress();
+            const publicKey = wallet.signer.keys.public;
 
             const info = await wallet.getAccount();
 
@@ -165,7 +166,8 @@ extensionApi.runtime.onConnect.addListener(async connection => {
                 hdPath,
                 balance: info.balance,
                 acc_type: info.acc_type,
-                deployFee
+                deployFee,
+                publicKey
             }
         }));
     }
@@ -440,18 +442,21 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         });
     });
 
-    emitter.on(EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE, async ({passcode}) => {
+    emitter.on(EVENT_TYPE.ACCOUNT_GET_SECRET, async ({passcode, hdPath}) => {
         try{
             const {seedPhrase} = await deriveAccount(passcode);
+            const wallet = await deriveWalletAccountByPath(seedPhrase, hdPath);
+
             connection.postMessage({
-                type: EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE,
+                type: EVENT_TYPE.ACCOUNT_GET_SECRET,
                 payload: {
-                    seedPhrase
+                    seedPhrase,
+                    secretKey: wallet.signer.keys.secret,
                 }
             });
         }catch (e){
             connection.postMessage({
-                type: EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE,
+                type: EVENT_TYPE.ACCOUNT_GET_SECRET,
                 error: {
                     message: 'Wrong passcode provided.'
                 }
