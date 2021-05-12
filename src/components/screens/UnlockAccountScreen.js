@@ -15,6 +15,7 @@ const UnlockAccountScreen = () => {
                     await unlockAccount(passcode);
                     hidePasscode();
                 }catch (e){
+                    console.log(e);
                     if(e.code === EVENT_ERRORS.ACCOUNT_UNLOCK_ERROR){
                         setError('Wrong passcode');
                     }

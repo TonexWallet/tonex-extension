@@ -27,7 +27,6 @@ export const decryptValue = async (tonLib, {
         return;
     }
 
-    console.log('Decrypting', value);
     const key = (await tonLib.crypto.sha256({data: btoa(passcode)})).hash;
     const decryptedData = (await tonLib.crypto.chacha20({data: value.data, key, nonce: value.nonce})).data;
     return JSON.parse(atob(decryptedData));

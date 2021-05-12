@@ -33,8 +33,6 @@ const useStyles = makeStyles({
     },
 
     buttonSend: {
-        textDecoration: 'none',
-
         '& svg': {
             transform: 'rotateX(180deg)'
         }
@@ -51,8 +49,6 @@ const WalletCard = () => {
 
     const balance = formatBalance(activeWallet.balance, 3);
 
-    console.log(activeWallet);
-
     return (
         <Card className={classes.walletCard} elevation={2}>
             <div className={classes.walletBalance}>
@@ -67,7 +63,7 @@ const WalletCard = () => {
                     <Typography variant={TypographyVariant.SUBHEADER} className={classes.walletBalanceDecimal}>,{balance.decimal}</Typography>
                 </div>
 
-                <Typography variant={TypographyVariant.LABEL} color={TypographyColor.SECONDARY}>€ 113,77</Typography>
+                {/*<Typography variant={TypographyVariant.LABEL} color={TypographyColor.SECONDARY}>€ 113,77</Typography>*/}
             </div>
             <div className={classes.walletActions}>
                 <Link to={'/transaction/create'} className={classes.buttonSend} >
@@ -76,10 +72,11 @@ const WalletCard = () => {
                     </Button>
                 </Link>
 
-
-                <Button className={classes.buttonReceive} secondary large>
-                    <ArrowDownIcon/>&nbsp;Receive
-                </Button>
+                <Link to={'/receive'} >
+                    <Button className={classes.buttonReceive} secondary large>
+                        <ArrowDownIcon/>&nbsp;Receive
+                    </Button>
+                </Link>
             </div>
         </Card>
     )

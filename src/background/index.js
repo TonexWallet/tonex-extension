@@ -186,6 +186,23 @@ chrome.runtime.onConnect.addListener(async connection => {
     });
 
     emitter.on(EVENT_TYPE.ACCOUNT_CREATE, async ({seedPhrase, passcode}) => {
+        const {valid} = await client.crypto.mnemonic_verify({
+            phrase: seedPhrase,
+            dictionary: SEED_PHRASE_DICTIONARY_ENGLISH,
+            word_count: SEED_PHRASE_WORD_COUNT,
+        });
+
+        if(!valid){
+            connection.postMessage({
+                type: EVENT_TYPE.ACCOUNT_CREATE,
+                error: {
+                    message: 'Wrong seed phrase provided!'
+                }
+            });
+
+            return;
+        }
+
         const initialWalletPath = getHDPathByIndex(0);
 
         const account = {
@@ -197,7 +214,7 @@ chrome.runtime.onConnect.addListener(async connection => {
         const encryptedAccount = await encryptValue(client, {
             value: account,
             passcode
-        })
+        });
 
         await setStoreValue('account', encryptedAccount);
 
@@ -236,7 +253,11 @@ chrome.runtime.onConnect.addListener(async connection => {
 
             try{
                 account = await deriveAccount(passcode);
-            }catch (e){}
+            }catch (e){
+                console.log('error', e);
+            }
+
+            console.log('derived', account)
 
             const wallets = await getAccountWallets(account);
             const {activeWalletPath} = account;
@@ -271,9 +292,10 @@ chrome.runtime.onConnect.addListener(async connection => {
     });
 
     emitter.on(EVENT_TYPE.WALLET_CREATE, async ({passcode}) => {
-        const {seedPhrase, paths} = await deriveAccount(passcode);
+        const account = await deriveAccount(passcode);
+        const {seedPhrase, paths} = account;
         const lastWalletPath = paths && paths.length && paths[paths.length - 1];
-        const lastWalletIndex = lastWallet && getIndexByHDPath(lastWalletPath);
+        const lastWalletIndex = lastWalletPath && getIndexByHDPath(lastWalletPath);
         const nextIndex = typeof lastWalletIndex === 'number' ? lastWalletIndex + 1 : 0;
         const nextHDPath = getHDPathByIndex(nextIndex);
 
@@ -289,8 +311,20 @@ chrome.runtime.onConnect.addListener(async connection => {
             }
         });
 
+        const updatedAccount = {
+            ...account,
+            paths: [...account.paths, nextHDPath]
+        };
+
+        const encryptedAccount = await encryptValue(client, {
+            value: updatedAccount,
+            passcode
+        });
+
+        await setStoreValue('account', encryptedAccount);
+
         // check
-        const wallets = await getAccountWallets(account);
+        const wallets = await getAccountWallets(updatedAccount);
 
         await updateAccountState({
             wallets,
@@ -390,6 +424,17 @@ chrome.runtime.onConnect.addListener(async connection => {
             payload: {
                 transactionInfo
             }
+        });
+    });
+
+    emitter.on(EVENT_TYPE.WALLET_SWITCH, async ({hdPath}) => {
+        await updateAccountState({
+            activeWalletPath: hdPath
+        });
+
+        connection.postMessage({
+            type: EVENT_TYPE.WALLET_SWITCH,
+            payload: {}
         });
     });
 

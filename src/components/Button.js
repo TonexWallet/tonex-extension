@@ -20,6 +20,7 @@ const useStyles = makeStyles({
         lineHeight: '16px',
         fontWeight: 'bold',
         textDecoration: 'none',
+        padding: '0 8px',
 
         '&:disabled': {
             cursor: 'initial',

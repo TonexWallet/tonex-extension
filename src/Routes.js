@@ -7,12 +7,11 @@ import {useAccount} from "./providers/AccountProvider";
 import UnlockAccountScreen from "./components/screens/UnlockAccountScreen";
 import {useWallets} from "./providers/WalletsProvider";
 import CreateTransactionScreen from "./components/screens/CreateTransactionScreen";
+import ReceiveScreen from "./components/screens/ReceiveScreen";
 
 const Routes = () => {
     const {initialized, locked} = useAccount();
     const {activeWallet} = useWallets();
-
-    console.log(locked, activeWallet);
 
     return (
         <>
@@ -39,6 +38,16 @@ const Routes = () => {
                     <CreateTransactionScreen/>
                 )}
             </Route>
+            <Route path="/receive">
+                {locked || !activeWallet ? (
+                    <Redirect to={{
+                        pathname: '/'
+                    }}/>
+                ) : (
+                    <ReceiveScreen/>
+                )}
+            </Route>
+
             <Route path="/wallet">
                 {locked || !activeWallet ? (
                     <Redirect to={{
@@ -48,6 +57,7 @@ const Routes = () => {
                     <WalletScreen/>
                 )}
             </Route>
+
             <Route path="/" exact>
                 {initialized ? (
                     locked || !activeWallet ? (

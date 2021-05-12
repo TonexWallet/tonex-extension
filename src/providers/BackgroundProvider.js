@@ -19,7 +19,8 @@ export const EVENT_TYPE = {
     ACCOUNT_GENERATE_SEED_PHRASE: 'account/generateSeedPhrase',
     WALLET_CREATE: 'wallet/create',
     WALLET_ACTIVATE: 'wallet/activate',
-    TRANSACTION_SEND: 'wallet/sendTransaction'
+    TRANSACTION_SEND: 'wallet/sendTransaction',
+    WALLET_SWITCH: 'wallet/switch'
 };
 
 export const SUBSCRIPTION_TYPE = {

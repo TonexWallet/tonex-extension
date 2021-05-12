@@ -17,6 +17,10 @@ const useStyles = makeStyles({
             margin: 0,
             padding: 0
         },
+
+        a: {
+            textDecoration: 'none',
+        }
     }
 });
 

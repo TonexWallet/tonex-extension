@@ -1,4 +1,9 @@
 # Tonex - FreeTON browser extension
+
+## Installation
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:

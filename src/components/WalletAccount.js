@@ -63,7 +63,7 @@ const WalletAccount = ({activeWallet, availableWallets = []}) => {
     const [accountDropdownOpened, setAccountDropdownOpened] = useState();
     const dropdownRef = useRef();
     const {showPrompt, hide} = usePasscodePrompt();
-    const {createWallet, changeWallet} = useWallets();
+    const {createWallet, switchWallet} = useWallets();
 
     const {copy} = useCopy(
         activeWallet && activeWallet.address
@@ -76,7 +76,7 @@ const WalletAccount = ({activeWallet, availableWallets = []}) => {
 
         showPrompt({
             onChange: (passcode) => {
-                createWallet(passcode)
+                createWallet({passcode});
             },
             onCancel: () => {
                 hide();
@@ -94,7 +94,8 @@ const WalletAccount = ({activeWallet, availableWallets = []}) => {
                         return (
                             <MenuItem key={wallet.address} onClick={() => {
                                 setAccountDropdownOpened(false);
-                                changeWallet(wallet.path);
+                                console.log('change ewallet', wallet.path)
+                                switchWallet(wallet.hdPath);
                             }}>
                                 <Avatar address={wallet.address} className={classes.accountItemAvatar}/>
                                 <Typography className={classes.accountItemLabel}>{shortenWalletAddress(wallet.address)}</Typography>

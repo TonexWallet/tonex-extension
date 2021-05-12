@@ -13,6 +13,7 @@ import Textarea from "../Textarea";
 import {useCallback, useState} from 'react';
 import {usePasscodePrompt} from "../../providers/PasscodePromptProvider";
 import {EVENT_TYPE, useBackground} from "../../providers/BackgroundProvider";
+import ScreenNavbar from "../ScreenNavbar";
 
 const useStyles = makeStyles({
     createTransactionScreen: {
@@ -30,10 +31,6 @@ const useStyles = makeStyles({
         height: '100%'
     },
 
-    transactionNavbar: {
-        display: 'flex',
-        width: '100%',
-    },
 
     transactionWallet: {
         display: 'flex',
@@ -72,21 +69,19 @@ const CreateTransactionScreen = () => {
 
     const sendTransaction = useCallback(async(passcode) => {
         const {address: recipient, amount, memo} = formData;
-        const result = await executeBackground(EVENT_TYPE.TRANSACTION_SEND, {
+        await executeBackground(EVENT_TYPE.TRANSACTION_SEND, {
             passcode,
             recipient,
             amount,
             memo,
             walletHDPath: activeWallet.hdPath
         });
-
-        console.log('transaction result', result);
     }, [activeWallet.hdPath, executeBackground, formData]);
 
     return (
         <>
             <div className={classes.createTransactionScreen}>
-                <div className={classes.transactionNavbar}>
+                <ScreenNavbar backAction={(
                     <Button link onClick={() => {
                         setFormData({});
                         history.replace({
@@ -95,7 +90,7 @@ const CreateTransactionScreen = () => {
                     }}>
                         Cancel
                     </Button>
-                </div>
+                )}/>
                 <div className={classes.transactionForm}>
                     <div className={classes.transactionWallet}>
                         <Avatar address={activeWallet.address} size={48}/>

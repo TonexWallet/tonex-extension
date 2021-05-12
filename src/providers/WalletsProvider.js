@@ -27,13 +27,27 @@ const WalletsProvider = ({children}) => {
         });
     }, [executeBackground]);
 
+    const switchWallet = useCallback(async (hdPath) => {
+        return await executeBackground(EVENT_TYPE.WALLET_SWITCH, {
+            hdPath
+        });
+    }, [executeBackground]);
+
+    const createWallet = useCallback(async ({passcode}) => {
+        return await executeBackground(EVENT_TYPE.WALLET_CREATE, {
+            passcode
+        });
+    }, [executeBackground]);
+
     const providerValue = {
         activeWallet: activeWallet && {
             ...activeWallet,
             initialized: activeWallet.acc_type === AccountType.active
         },
         wallets,
-        activateWallet
+        activateWallet,
+        switchWallet,
+        createWallet
     };
 
     return (
