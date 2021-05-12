@@ -68,6 +68,10 @@ const CreateTransactionScreen = () => {
             memo,
             walletHDPath: activeWallet.hdPath
         });
+
+        history.replace({
+            pathname: '/wallet'
+        });
     }, [activeWallet.hdPath, executeBackground, formData]);
 
     return (
