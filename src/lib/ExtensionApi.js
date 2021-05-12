@@ -1,4 +1,3 @@
-/* eslint-disable */
 const apis = [
     'alarms',
     'bookmarks',
@@ -27,10 +26,11 @@ const hasChrome = typeof chrome !== 'undefined'
 const hasWindow = typeof window !== 'undefined'
 const hasBrowser = typeof browser !== 'undefined'
 
-const ExtensionApiModule = () => {
+function Extension () {
     const _this = this
 
     apis.forEach(function (api) {
+
         _this[api] = null
 
         if (hasChrome) {
@@ -80,8 +80,7 @@ const ExtensionApiModule = () => {
         } catch (e) {
         }
     }
+
 }
 
-const ExtensionApi = ExtensionApiModule();
-
-export default ExtensionApi;
+module.exports = Extension;

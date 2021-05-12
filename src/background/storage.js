@@ -1,6 +1,8 @@
 import isEmpty from "lodash/isEmpty";
 import base64ToHex from "../utils/base64toHex";
 
+import extensionApi from '../lib/ExtensionApi';
+
 export const encryptValue = async (tonLib, {
     value,
     passcode
@@ -35,7 +37,7 @@ export const decryptValue = async (tonLib, {
 export const getStoreValue = async (key) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line no-undef
-        chrome.storage.local.get(key, (storage) => {
+        extensionApi.storage.local.get(key, (storage) => {
             const storageValue = storage[key];
 
             resolve(storageValue);
@@ -46,7 +48,7 @@ export const getStoreValue = async (key) => {
 export const setStoreValue = async (key, value) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line no-undef
-        chrome.storage.local.set({[key]: value}, (...args) => {
+        extensionApi.storage.local.set({[key]: value}, (...args) => {
             resolve(...args)
         });
     })
@@ -55,7 +57,7 @@ export const setStoreValue = async (key, value) => {
 export const removeStoreValue = async (key) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line no-undef
-        chrome.storage.local.remove(key, (...args) => {
+        extensionApi.storage.local.remove(key, (...args) => {
             resolve(...args)
         });
     })

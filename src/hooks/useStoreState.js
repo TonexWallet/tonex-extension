@@ -1,5 +1,7 @@
 import {useCallback, useEffect, useMemo, useReducer} from "react";
 
+import extensionApi from '../lib/ExtensionApi';
+
 const valueReducer = (state, action) => {
     switch (action.type) {
         case 'loaded':
@@ -36,14 +38,14 @@ const useStoreState = (key, initialValue) => {
             }
         });
 
-        window.chrome.storage.local.set({[key]: value}, () => {
+        extensionApi.storage.local.set({[key]: value}, () => {
 
         });
     }, [key]);
 
     useEffect(() => {
         if(!state.loaded){
-            window.chrome.storage.local.get(key, (storage) => {
+            extensionApi.storage.local.get(key, (storage) => {
                 const storageValue = storage[key];
 
                 if(storageValue){

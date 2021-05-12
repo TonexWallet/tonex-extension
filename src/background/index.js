@@ -32,7 +32,7 @@ let accountState = {
     activeWalletPath: null,
 }
 
-chrome.runtime.onConnect.addListener(async connection => {
+extensionApi.runtime.onConnect.addListener(async connection => {
     const onTransaction = ({wallet, result}) => {
         const {id, src, value} = result;
 
@@ -41,7 +41,7 @@ chrome.runtime.onConnect.addListener(async connection => {
         registration.showNotification(`Received from ${shortenWalletAddress(src)}`, {
             body: `+${amount}`,
             data: `+${amount}`,
-            icon: chrome.runtime.getURL("icons/128.png"),
+            icon: extensionApi.runtime.getURL("icons/128.png"),
             message: `+${amount}`,
         })
     }
@@ -466,12 +466,12 @@ chrome.runtime.onConnect.addListener(async connection => {
     await updateAccountState({});
 });
 
-chrome.runtime.onStartup.addListener(async () => {
+extensionApi.runtime.onStartup.addListener(async () => {
     console.log('started up');
     // init();
 });
 
-chrome.runtime.onInstalled.addListener(async () => {
+extensionApi.runtime.onInstalled.addListener(async () => {
     console.log('installed')
     // init();
 });
