@@ -1,5 +1,8 @@
 import {makeStyles} from "@material-ui/styles";
 import {ReactComponent as MoreIcon} from '../img/more-vertical-icon.svg';
+import {ReactComponent as LockIcon} from '../img/lock-icon.svg';
+import {ReactComponent as RemoveIcon} from '../img/remove-icon.svg';
+import {ReactComponent as SettingsIcon} from '../img/settings-icon.svg';
 import IconButton from "./IconButton";
 import Dropdown from "./Dropdown";
 import Menu from "./Menu";
@@ -7,6 +10,10 @@ import MenuItem from "./MenuItem";
 import {useState} from 'react';
 import {useConfirmationPrompt} from "../providers/ConfirmationPromptProvider";
 import {useAccount} from "../providers/AccountProvider";
+import MenuItemIcon from "./MenuItemIcon";
+import MenuDivider from "./MenuDivider";
+import Typography, {TypographyColor} from "./Typography";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     accountActions: {
@@ -37,7 +44,23 @@ const AccountActions = () => {
                     <MenuItem onClick={() => {
                         lockAccount();
                         setDropdownOpened(false);
-                    }}>Lock wallet</MenuItem>
+                    }}>
+                        <MenuItemIcon>
+                            <LockIcon/>
+                        </MenuItemIcon>
+                        Lock wallet
+                    </MenuItem>
+
+                    <Link to={'/settings'}>
+                        <MenuItem>
+                            <MenuItemIcon>
+                                <SettingsIcon/>
+                            </MenuItemIcon>
+                            Settings
+                        </MenuItem>
+                    </Link>
+
+                    <MenuDivider/>
 
                     <MenuItem onClick={() => {
                         showPrompt({
@@ -52,7 +75,12 @@ const AccountActions = () => {
                             }
                         })
                         setDropdownOpened(false);
-                    }}>Exit</MenuItem>
+                    }}>
+                        <MenuItemIcon>
+                            <RemoveIcon/>
+                        </MenuItemIcon>
+                        <Typography variant={TypographyColor.DANGER}>Exit and remove</Typography>
+                    </MenuItem>
                 </Menu>
             )}>
                 <IconButton>

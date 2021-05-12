@@ -17,6 +17,7 @@ export const EVENT_TYPE = {
     ACCOUNT_LOCK: 'account/lock',
     ACCOUNT_REMOVE: 'account/remove',
     ACCOUNT_GENERATE_SEED_PHRASE: 'account/generateSeedPhrase',
+    ACCOUNT_GET_SEED_PHRASE: 'account/getSeedPhrase',
     WALLET_CREATE: 'wallet/create',
     WALLET_ACTIVATE: 'wallet/activate',
     TRANSACTION_SEND: 'wallet/sendTransaction',
@@ -40,7 +41,6 @@ export const useBackgroundSubscription = (event, initialValue = null) => {
     const {subscribe, unsubscribe, executeBackground} = useBackground();
 
     useEffect(() => {
-        console.log('subscribe', event)
         subscribe(event, ({payload, error}) => {
             if(error){
                 console.log('Error', error)
@@ -54,8 +54,6 @@ export const useBackgroundSubscription = (event, initialValue = null) => {
         });
 
         return () => {
-            console.log('unsubscribe', event)
-
             unsubscribe(event);
         };
     }, [event, executeBackground, subscribe, unsubscribe]);
@@ -93,7 +91,6 @@ const BackgroundProvider = ({children}) => {
         connectionRef.current = window.chrome.runtime.connect({name: 'tonexPopup'});
 
         connectionRef.current.onMessage.addListener(({type, payload, error}) => {
-            console.log('event', type, payload);
             backgroundEmitterRef.current.emit(type, {
                 payload,
                 error
@@ -135,7 +132,11 @@ const BackgroundProvider = ({children}) => {
             unsubscribe,
             executeBackground
         }}>
-            {!isReady ? 'Waiting for background ...' : children}
+            {isReady ? (
+                children
+            ) : (
+                'wating for background'
+            )}
         </BackgroundProviderContext.Provider>
     )
 };

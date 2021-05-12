@@ -10,17 +10,9 @@ import CreatePinPrompt from "../CreatePinPrompt";
 import IconButton from "../IconButton";
 import {ReactComponent as BackArrowIcon} from "../../img/back-arrow-icon.svg";
 import {Link} from "react-router-dom";
+import BaseScreen from "../BaseScreen";
 
 const useStyles = makeStyles({
-    restoreAccountScreen: {
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: 16,
-        boxSizing: 'border-box'
-    },
-
     restoreForm: {
         width: '100%',
         position: 'relative',
@@ -67,15 +59,13 @@ const RestoreAccountScreen = () => {
     const [error, setError] = useState(null);
 
     return (
-        <div className={classes.restoreAccountScreen}>
-            <div className={classes.screenNavigation}>
-                <Link to={'/'} className={classes.buttonSend} >
-                    <IconButton>
-                        <BackArrowIcon/>
-                    </IconButton>
-                </Link>
-            </div>
-
+        <BaseScreen backAction={(
+            <Link to={'/'} className={classes.buttonSend} >
+                <IconButton>
+                    <BackArrowIcon/>
+                </IconButton>
+            </Link>
+        )} className={classes.restoreAccountScreen}>
             <div className={classes.restoreForm}>
                 <Wrapper>
                     <Typography variant={TypographyVariant.SUBHEADER}>
@@ -116,7 +106,7 @@ const RestoreAccountScreen = () => {
                     setIsOpenCreatePin(false);
                     await onCreateAccount( passcode);
                 }}/>
-        </div>
+        </BaseScreen>
     )
 };
 

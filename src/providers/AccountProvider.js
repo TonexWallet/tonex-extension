@@ -40,17 +40,15 @@ const AccountProvider = ({children}) => {
         });
     }, [executeBackground]);
 
-    const retrieveAccount = useCallback(async(passcode) => {
-        const {account} = await executeBackground(EVENT_TYPE.ACCOUNT_RETRIEVE, {
+    const removeAccount = useCallback(async() => {
+        return await executeBackground(EVENT_TYPE.ACCOUNT_REMOVE);
+    }, [executeBackground])
+
+    const getSeedPhrase = useCallback(async(passcode) => {
+        return await executeBackground(EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE, {
             passcode
         });
-
-        return account;
     }, [executeBackground]);
-
-    const removeAccount = useCallback(async() => {
-        await executeBackground(EVENT_TYPE.ACCOUNT_REMOVE);
-    }, [executeBackground])
 
     return (
         <AccountProviderContext.Provider value={{
@@ -58,11 +56,11 @@ const AccountProvider = ({children}) => {
             locked: account?.locked,
             wallets: account?.wallets,
             createAccount,
-            retrieveAccount,
             generateSeedPhrase,
             lockAccount,
             unlockAccount,
             removeAccount,
+            getSeedPhrase
         }}>
             {account && children}
         </AccountProviderContext.Provider>

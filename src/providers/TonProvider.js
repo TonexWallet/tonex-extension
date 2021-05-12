@@ -9,20 +9,20 @@ export const useTon = () => {
 };
 
 export const AvailableNetworks = [
+    'rustnet.ton.dev',
     'net.ton.dev',
     'main.ton.dev',
     'fld.ton.dev',
-    'rustnet.ton.dev',
 ];
 
 const TonProvider = ({children}) => {
     const {network, availableNetworks} = useBackgroundSubscription(SUBSCRIPTION_TYPE.TON, {});
 
-    const {sendMessage} = useBackground();
+    const {executeBackground} = useBackground();
 
-    const changeNetwork = useCallback((network) => {
-        sendMessage(EVENT_TYPE.TON_SET_NETWORK, {network});
-    }, [sendMessage]);
+    const changeNetwork = useCallback(async(network) => {
+        return await executeBackground(EVENT_TYPE.TON_SET_NETWORK, {network});
+    }, [executeBackground]);
 
     return (
         <TonProviderContext.Provider value={{

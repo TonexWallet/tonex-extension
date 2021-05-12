@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const apis = [
     'alarms',
     'bookmarks',
@@ -81,6 +83,7 @@ function Extension () {
         }
     }
 
+    return _this;
 }
 
-module.exports = Extension;
+module.exports = Extension();

@@ -29,12 +29,13 @@ const useStyles = makeStyles({
     }
 });
 
-const Textarea = ({placeholder, className, value = '', onChange, rows = 3, autoFocus, maxLength, classes: classesOverride = {}}) => {
+const Textarea = ({placeholder, className, readOnly = false, value = '', onChange, rows = 3, autoFocus, maxLength, classes: classesOverride = {}}) => {
     const classes = useStyles();
 
     return (
         <div className={clsx(classes.textareaContainer, classesOverride.textareaContainer)}>
             <textarea
+                readOnly={readOnly}
                 placeholder={placeholder}
                 autoFocus={autoFocus}
                 onChange={(e) => {

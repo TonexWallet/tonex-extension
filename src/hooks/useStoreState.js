@@ -26,10 +26,6 @@ const useStoreState = (key, initialValue) => {
         loaded: false
     });
 
-    if(key === 'routerEntries'){
-        console.log(state);
-    }
-
     const updateValue = useCallback(value => {
         dispatch({
             type: 'changed',

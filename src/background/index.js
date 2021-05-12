@@ -14,6 +14,7 @@ import {AvailableNetworks} from "../providers/TonProvider";
 import transferAbi from '../contracts/Transfer/transfer.abi.json';
 import Big from "../lib/Big";
 import watchWallet from "./walletWatcher";
+import extensionApi from '../lib/ExtensionApi';
 
 self.location.reload = () => {
 
@@ -47,6 +48,7 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     }
 
     const setupTonClient = ({network}) => {
+        console.log('setup client', network)
         if(!client){
             client = new TonClient( {
                 network: {
@@ -87,6 +89,7 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     }
 
     const updateAccountState = async (updatedState = {}) => {
+
         accountState = {
             ...accountState,
             ...updatedState,
@@ -110,8 +113,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
             client,
             wallet: activeWallet.address,
             onUpdate: activeWalletData => {
-                console.log('updated', activeWalletData);
-
                 connection && connection.postMessage({
                     type: SUBSCRIPTION_TYPE.WALLET,
                     payload: {
@@ -123,8 +124,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
                 });
             },
         });
-
-        console.log('activeWalletData', activeWalletData)
 
         connection.postMessage({
             type: SUBSCRIPTION_TYPE.WALLET,
@@ -144,6 +143,7 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         return await Promise.all(paths.map(async hdPath => {
             const wallet = await deriveWalletAccountByPath(seedPhrase, hdPath);
             const address = await wallet.getAddress();
+
             const info = await wallet.getAccount();
 
             let deployFee;
@@ -257,10 +257,13 @@ extensionApi.runtime.onConnect.addListener(async connection => {
                 console.log('error', e);
             }
 
-            console.log('derived', account)
-
             const wallets = await getAccountWallets(account);
             const {activeWalletPath} = account;
+
+            connection.postMessage({
+                type: EVENT_TYPE.ACCOUNT_UNLOCK,
+                payload: {}
+            });
 
             await updateAccountState({
                 wallets,
@@ -333,7 +336,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     });
 
     emitter.on(EVENT_TYPE.ACCOUNT_REMOVE, async () => {
-        console.log('removing');
         await removeStoreValue('account');
 
         await updateAccountState({
@@ -438,6 +440,52 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         });
     });
 
+    emitter.on(EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE, async ({passcode}) => {
+        try{
+            const {seedPhrase} = await deriveAccount(passcode);
+            connection.postMessage({
+                type: EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE,
+                payload: {
+                    seedPhrase
+                }
+            });
+        }catch (e){
+            connection.postMessage({
+                type: EVENT_TYPE.ACCOUNT_GET_SEED_PHRASE,
+                error: {
+                    message: 'Wrong passcode provided.'
+                }
+            });
+        }
+    });
+
+    emitter.on(EVENT_TYPE.TON_SET_NETWORK, async ({network}) => {
+        await setStoreValue('network', network);
+
+        reconnect({
+            network
+        });
+
+        await updateAccountState({});
+
+        connection.postMessage({
+            type: EVENT_TYPE.TON_SET_NETWORK,
+            payload: {
+                network
+            }
+        });
+
+        console.log('changed network to', network)
+
+        connection.postMessage({
+            type: SUBSCRIPTION_TYPE.TON,
+            payload: {
+                network,
+                availableNetworks: AvailableNetworks
+            }
+        });
+    });
+
     connection.onDisconnect.addListener( () => {
         console.log('Disconnect');
         connection = null;
@@ -462,16 +510,13 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         }
     });
 
-    console.log('update account state', accountState)
     await updateAccountState({});
 });
 
 extensionApi.runtime.onStartup.addListener(async () => {
-    console.log('started up');
-    // init();
+
 });
 
 extensionApi.runtime.onInstalled.addListener(async () => {
-    console.log('installed')
-    // init();
+
 });

@@ -1,5 +1,5 @@
 import {makeStyles} from "@material-ui/styles";
-import {ReactComponent as CopyIcon} from '../img/copy-2.svg';
+import {ReactComponent as CopyIcon} from '../img/copy-icon.svg';
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import shortenWalletAddress from "../utils/shortenWalletAddress";
 import {useCallback, useRef, useState} from "react";
@@ -94,7 +94,6 @@ const WalletAccount = ({activeWallet, availableWallets = []}) => {
                         return (
                             <MenuItem key={wallet.address} onClick={() => {
                                 setAccountDropdownOpened(false);
-                                console.log('change ewallet', wallet.path)
                                 switchWallet(wallet.hdPath);
                             }}>
                                 <Avatar address={wallet.address} className={classes.accountItemAvatar}/>

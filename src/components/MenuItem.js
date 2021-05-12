@@ -9,6 +9,8 @@ const useStyles = makeStyles({
         cursor: 'pointer',
         padding: '8px 16px',
         boxSizing: 'border-box',
+        color: '#2E2E2E',
+        textDecoration: 'none',
 
         '&:hover': {
             backgroundColor: '#E8F4FF',

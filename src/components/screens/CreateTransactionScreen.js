@@ -13,17 +13,9 @@ import Textarea from "../Textarea";
 import {useCallback, useState} from 'react';
 import {usePasscodePrompt} from "../../providers/PasscodePromptProvider";
 import {EVENT_TYPE, useBackground} from "../../providers/BackgroundProvider";
-import ScreenNavbar from "../ScreenNavbar";
+import BaseScreen from "../BaseScreen";
 
 const useStyles = makeStyles({
-    createTransactionScreen: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 16
-    },
-
     transactionForm: {
         width: '100%',
         display: 'flex',
@@ -80,17 +72,16 @@ const CreateTransactionScreen = () => {
 
     return (
         <>
-            <div className={classes.createTransactionScreen}>
-                <ScreenNavbar backAction={(
-                    <Button link onClick={() => {
-                        setFormData({});
-                        history.replace({
-                            pathname: '/wallet'
-                        })
-                    }}>
-                        Cancel
-                    </Button>
-                )}/>
+            <BaseScreen backAction={(
+                <Button link onClick={() => {
+                    setFormData({});
+                    history.replace({
+                        pathname: '/wallet'
+                    })
+                }}>
+                    Cancel
+                </Button>
+            )} className={classes.createTransactionScreen}>
                 <div className={classes.transactionForm}>
                     <div className={classes.transactionWallet}>
                         <Avatar address={activeWallet.address} size={48}/>
@@ -144,7 +135,7 @@ const CreateTransactionScreen = () => {
                         }}>Proceed</Button>
                     </div>
                 </div>
-            </div>
+            </BaseScreen>
         </>
     )
 };

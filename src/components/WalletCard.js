@@ -1,5 +1,5 @@
 import Card from "./Card";
-import Typography, {TypographyColor, TypographyVariant} from "./Typography";
+import Typography, {TypographyVariant} from "./Typography";
 import {ReactComponent as CrystalIcon} from '../img/crystal-icon.svg';
 import {ReactComponent as ArrowDownIcon} from '../img/arrow-down-icon.svg';
 import {makeStyles} from "@material-ui/styles";

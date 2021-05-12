@@ -47,7 +47,8 @@ const WalletActivate = () => {
             hdPath: activeWallet.hdPath,
             passcode
         });
-    }, [activateWallet, activeWallet.hdPath]);
+        hide();
+    }, [hide, activateWallet, activeWallet.hdPath]);
 
     const {amount: feeAmount, decimal: feeDecimal} = formatBalance(activeWallet.deployFee);
 
