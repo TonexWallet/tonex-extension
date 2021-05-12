@@ -4,7 +4,7 @@
 * Download Release from [Releases page](https://github.com/TonexWallet/tonex-extension/releases)
 * Unpack build
 * Toggle Developer mode in Chrome: Menu > More tools > Extensions
-* Click "Load unpacked" button and choose unpacked build
+* Click "Load unpacked" button and choose unpacked build directory
 * Done
 
 Extension will be available in Chrome store and other browsers as soon as possible.
