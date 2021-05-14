@@ -1,7 +1,7 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import ScreenNavbar from "./ScreenNavbar";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     baseScreen: {
         height: '100%',
         width: '100%',

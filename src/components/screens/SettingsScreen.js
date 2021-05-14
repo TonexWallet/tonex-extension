@@ -2,7 +2,7 @@ import BaseScreen from "../BaseScreen";
 import IconButton from "../IconButton";
 import {ReactComponent as BackArrowIcon} from "../../img/back-arrow-icon.svg";
 import {Link} from "react-router-dom";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import {usePasscodePrompt} from "../../providers/PasscodePromptProvider";
 import {AvailableNetworks, useTon} from "../../providers/TonProvider";
 import InputLabel from "../InputLabel";
@@ -13,7 +13,7 @@ import {useState} from 'react';
 import {useAccount} from "../../providers/AccountProvider";
 import {useWallets} from "../../providers/WalletsProvider";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     settingsScreen: {
         display: 'flex',
         flexDirection: 'column',

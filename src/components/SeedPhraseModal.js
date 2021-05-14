@@ -1,5 +1,5 @@
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import {ReactComponent as BackArrowIcon} from '../img/back-arrow-icon.svg';
 import {ReactComponent as CopiedIcon} from '../img/copied-icon.svg';
 import IconButton from "./IconButton";
@@ -7,7 +7,7 @@ import Button from "./Button";
 import SeedPhrase from "./SeedPhrase";
 import useCopy from "@react-hook/copy";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     modalNavigation: {
         display: 'flex',
         width: '100%'

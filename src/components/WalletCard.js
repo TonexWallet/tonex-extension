@@ -2,13 +2,13 @@ import Card from "./Card";
 import Typography, {TypographyVariant} from "./Typography";
 import {ReactComponent as CrystalIcon} from '../img/crystal-icon.svg';
 import {ReactComponent as ArrowDownIcon} from '../img/arrow-down-icon.svg';
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Button from "./Button";
 import {useWallets} from "../providers/WalletsProvider";
 import {Link} from "react-router-dom";
 import formatBalance from "../utils/formatBalance";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     walletCard: {
         padding: 16,
         boxShadow: '0px 4px 40px rgba(215, 236, 245, 0.8)',

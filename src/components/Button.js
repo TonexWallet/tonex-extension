@@ -1,8 +1,8 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import clsx from "clsx";
 import React from "react";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     button: {
         minWidth: 100,
         height: 32,

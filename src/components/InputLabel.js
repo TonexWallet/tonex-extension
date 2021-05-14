@@ -1,8 +1,8 @@
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import clsx from "clsx";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     label: {
         display: 'flex',
         flexDirection: 'column',

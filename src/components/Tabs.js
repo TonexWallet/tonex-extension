@@ -1,8 +1,8 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import clsx from "clsx";
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     tabs: {
         width: '100%',
         display: 'flex',

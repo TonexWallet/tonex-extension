@@ -1,11 +1,11 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Wrapper from "../Wrapper";
 import Typography, {TypographyColor, TypographyVariant} from "../Typography";
 import Button from "../Button";
 import {Link} from "react-router-dom";
 import {ReactComponent as TonexIcon} from '../../img/tonex.svg';
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     welcomeScreen: {
         height: '100%',
         display: 'flex',

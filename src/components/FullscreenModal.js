@@ -1,9 +1,9 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import IconButton from "./IconButton";
 import {ReactComponent as CloseIcon} from "../img/x.svg";
 import clsx from "clsx";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     fullscreenModal: {
         backgroundColor: "#fff",
         height: '100%',

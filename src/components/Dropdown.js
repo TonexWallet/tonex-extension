@@ -1,9 +1,9 @@
 import {useRef} from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import clsx from "clsx";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     dropdownContent: {
         position: 'absolute',
         boxSizing: 'border-box',

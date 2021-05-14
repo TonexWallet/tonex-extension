@@ -1,8 +1,8 @@
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Button from "./Button";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     pinNavigation: {
         display: 'flex',
         width: '100%'

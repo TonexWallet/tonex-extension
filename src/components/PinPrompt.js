@@ -1,11 +1,11 @@
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import PinInput from "./PinInput";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import {ReactComponent as BackArrowIcon} from '../img/back-arrow-icon.svg';
 import IconButton from "./IconButton";
 
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     pinLabel: {
         margin: '32px 16px'
     },

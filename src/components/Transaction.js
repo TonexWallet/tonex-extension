@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Avatar from "./Avatar";
 import {ReactComponent as ArrowIcon} from "../img/arrow-down-icon.svg";
 import clsx from "clsx";
@@ -7,7 +7,7 @@ import shortenWalletAddress from "../utils/shortenWalletAddress";
 import formatBalance from "../utils/formatBalance";
 import {ReactComponent as CrystalIcon} from "../img/crystal-icon.svg";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     transaction: {
         display: 'flex'
     },

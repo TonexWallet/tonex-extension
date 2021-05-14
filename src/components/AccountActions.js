@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import {ReactComponent as MoreIcon} from '../img/more-vertical-icon.svg';
 import {ReactComponent as LockIcon} from '../img/lock-icon.svg';
 import {ReactComponent as RemoveIcon} from '../img/remove-icon.svg';
@@ -15,7 +15,7 @@ import MenuDivider from "./MenuDivider";
 import Typography, {TypographyColor} from "./Typography";
 import {Link} from "react-router-dom";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     accountActions: {
         display: 'flex',
     },

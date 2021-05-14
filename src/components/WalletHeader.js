@@ -1,8 +1,8 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import WalletAccount from "./WalletAccount";
 import AccountActions from "./AccountActions";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     walletHeader: {
         display: 'flex',
         alignItems: 'center',

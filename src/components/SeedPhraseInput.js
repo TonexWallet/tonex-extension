@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import fill from 'lodash/fill';
 import assign from 'lodash/assign';
@@ -8,7 +8,7 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import SeedPhraseWord from "./SeedPhraseWord";
 import clsx from "clsx";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     seedPhraseInput: {
         width: '100%'
     },

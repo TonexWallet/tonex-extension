@@ -1,7 +1,7 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import clsx from "clsx";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     seedPhraseWord: {
         backgroundColor: '#f9f9f9',
         fontWeight: 500,

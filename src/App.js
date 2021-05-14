@@ -1,5 +1,5 @@
 import Popup from "./components/Popup";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import TonProvider from "./providers/TonProvider";
 import {Switch} from 'react-router-dom';
 import AccountProvider from "./providers/AccountProvider";
@@ -10,7 +10,7 @@ import PasscodePromptProvider from "./providers/PasscodePromptProvider";
 import BackgroundProvider from "./providers/BackgroundProvider";
 import ConfirmationPromptProvider from "./providers/ConfirmationPromptProvider";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     '@global': {
         body: {
             fontFamily: "'IBM Plex Sans', sans-serif",

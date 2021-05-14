@@ -1,8 +1,8 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import randomColor from '../lib/randomColor';
 import clsx from "clsx";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     avatar: {
         borderRadius: '50%',
         overflow: 'hidden',

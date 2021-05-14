@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import {ReactComponent as CopyIcon} from '../img/copy-icon.svg';
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import shortenWalletAddress from "../utils/shortenWalletAddress";
@@ -14,7 +14,7 @@ import IconButton from "./IconButton";
 import useCopy from "@react-hook/copy";
 import {ReactComponent as DropdownIcon} from '../img/dropdown-icon.svg';
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     account: {
         display: 'flex',
         alignItems: 'center'

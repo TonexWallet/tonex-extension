@@ -1,10 +1,10 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Transaction, {TransactionTypeEnum} from "./Transaction";
 import {useWallets} from "../providers/WalletsProvider";
 import {ReactComponent as EmptyActivityIcon} from '../img/empty-activity-icon.svg';
 import Typography, {TypographyVariant, TypographyColor} from "./Typography";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     transactions: {
         '&>*': {
             marginTop: 8

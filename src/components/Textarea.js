@@ -1,8 +1,8 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import clsx from "clsx";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     textareaContainer: {
         position: 'relative',
         width: '100%',

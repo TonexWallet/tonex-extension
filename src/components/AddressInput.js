@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import shortenWalletAddress from "../utils/shortenWalletAddress";
 import {useRef, useState} from 'react';
 import Typography, {TypographyVariant} from "./Typography";
@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 import Menu from "./Menu";
 import MenuItem from "./MenuItem";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     addressInput: {
         width: '100%',
         position: 'relative',

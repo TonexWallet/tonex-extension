@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import IconButton from "../IconButton";
 import {ReactComponent as BackArrowIcon} from "../../img/back-arrow-icon.svg";
 import {Link} from "react-router-dom";
@@ -11,7 +11,7 @@ import {useWallets} from "../../providers/WalletsProvider";
 import {ReactComponent as CopyIcon} from '../../img/copy-icon.svg';
 import useCopy from "@react-hook/copy";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     receiveContent: {
         width: '100%',
         height: '100%',

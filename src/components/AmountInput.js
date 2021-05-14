@@ -1,8 +1,8 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Input from "./Input";
 import {ReactComponent as CrystalIcon} from "../img/crystal-icon.svg";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     amountInput: {
 
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 const AmountInput = ({value, onChange}) => {
-    const classes = useStyles();
+    useStyles();
 
     return (
         <Input

@@ -1,5 +1,5 @@
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import {ReactComponent as BackArrowIcon} from '../img/back-arrow-icon.svg';
 import IconButton from "./IconButton";
 import Button from "./Button";
@@ -7,7 +7,7 @@ import SeedPhraseInput from "./SeedPhraseInput";
 import {useCallback, useState, useMemo} from 'react';
 import shuffle from 'lodash/shuffle';
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     modalHeader: {
         display: 'flex',
         width: '100%',

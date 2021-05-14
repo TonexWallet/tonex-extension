@@ -1,12 +1,12 @@
 import useKeyDown from "../hooks/useKeyDown";
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import clsx from "clsx";
 import Typography, {TypographyVariant} from "./Typography";
 import IconButton from "./IconButton";
 import {ReactComponent as DeleteIcon} from '../img/delete-icon.svg';
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     pinInput: {
         display: 'flex',
         alignItems: 'center',

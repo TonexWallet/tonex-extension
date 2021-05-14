@@ -1,5 +1,5 @@
 import Button from "../Button";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Typography, {TypographyColor, TypographyVariant} from "../Typography";
 import Wrapper from "../Wrapper";
 import {useAccount} from "../../providers/AccountProvider";
@@ -12,7 +12,7 @@ import {ReactComponent as BackArrowIcon} from "../../img/back-arrow-icon.svg";
 import {Link} from "react-router-dom";
 import BaseScreen from "../BaseScreen";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     restoreForm: {
         width: '100%',
         position: 'relative',

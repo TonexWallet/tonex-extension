@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import Dropdown from "./Dropdown";
 import {useState} from "react";
@@ -6,7 +6,7 @@ import Menu from "./Menu";
 import MenuItem from "./MenuItem";
 import {AvailableNetworks, useTon} from "../providers/TonProvider";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     statusBar: {
         width: '100%',
         display: 'flex',

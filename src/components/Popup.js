@@ -1,6 +1,6 @@
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     popup: {
         width: 320,
         height: 560,

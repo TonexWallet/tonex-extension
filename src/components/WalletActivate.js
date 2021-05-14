@@ -4,7 +4,7 @@ import Typography, {TypographyColor, TypographyVariant} from "./Typography";
 import Button from "./Button";
 import MessageCard from "./MessageCard";
 import useModal from "../hooks/useModal";
-import {makeStyles} from "@material-ui/styles";
+import {createUseStyles} from 'react-jss';
 import FullscreenModal from "./FullscreenModal";
 import {useCallback} from 'react';
 import {useWallets} from "../providers/WalletsProvider";
@@ -13,7 +13,7 @@ import Avatar from "./Avatar";
 import {usePasscodePrompt} from "../providers/PasscodePromptProvider";
 import formatBalance from "../utils/formatBalance";
 
-const useStyles = makeStyles({
+const useStyles = createUseStyles({
     activateModal: {
         display: 'flex',
         alignItems: 'center',
