@@ -1,5 +1,4 @@
 /* eslint-disable */
-import getLibWeb from "./libweb";
 import {abiContract, signerKeys, signerNone, TonClient} from "@tonclient/core";
 import {EVENT_ERRORS, EVENT_TYPE, SUBSCRIPTION_TYPE} from "../providers/BackgroundProvider";
 import mitt from "mitt";
@@ -15,14 +14,10 @@ import transferAbi from '../contracts/Transfer/transfer.abi.json';
 import Big from "../lib/Big";
 import watchWallet from "./walletWatcher";
 import extensionApi from '../lib/ExtensionApi';
-
-self.location.reload = () => {
-
-};
-
-const libWeb = getLibWeb({
-    debugLog: console.log
-});
+import {libWeb} from "@tonclient/lib-web";
+// const libWeb = getLibWeb({
+//     debugLog: console.log
+// });
 
 TonClient.useBinaryLibrary(libWeb);
 

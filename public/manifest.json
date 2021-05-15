@@ -1,25 +1,26 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "version": "1.0.0",
   "short_name": "Tonex",
   "name": "Tonex Wallet",
   "description": "FreeTon browser extension",
-  "action": {
+  "browser_action": {
+    "default_popup": "popup.html",
     "default_title": "Tonex",
-    "default_popup": "popup.html"
+    "default_icon": {
+      "16": "img/icon-16.png",
+      "48": "img/icon-48.png"
+    }
   },
   "background": {
-    "service_worker": "background.bundle.js",
-    "worker": "background.bundle.js"
+    "scripts": ["background.bundle.js"],
+    "persistent": false
   },
   "icons": {
     "16": "img/icon-16.png",
     "48": "img/icon-48.png",
     "128": "img/icon-128.png"
   },
-  "options_page": "options.html",
   "permissions": ["storage"],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
-  }
+  "content_security_policy": "script-src 'self' 'wasm-eval' 'unsafe-eval'; object-src 'self'"
 }
