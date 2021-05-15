@@ -1,7 +1,7 @@
 # Tonex - FreeTON browser extension
 
 ## Installation
-* Download Release from [Releases page](https://github.com/TonexWallet/tonex-extension/releases)
+* Download Release from [Releases page](https://github.com/TonexWallet/tonex-extension/releases). [First version](https://github.com/TonexWallet/tonex-extension/releases/tag/1.0.0) is contest release.
 * Unpack build
 * Toggle Developer mode in Chrome: Menu > More tools > Extensions
 * Click "Load unpacked" button and choose unpacked build directory
