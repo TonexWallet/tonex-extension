@@ -14,10 +14,11 @@ import transferAbi from '../contracts/Transfer/transfer.abi.json';
 import Big from "../lib/Big";
 import watchWallet from "./walletWatcher";
 import extensionApi from '../lib/ExtensionApi';
-import {libWeb} from "@tonclient/lib-web";
-// const libWeb = getLibWeb({
-//     debugLog: console.log
-// });
+import getLibWeb from "./libweb";
+// import {libWeb} from "@tonclient/lib-web";
+const libWeb = getLibWeb({
+    debugLog: console.log
+});
 
 TonClient.useBinaryLibrary(libWeb);
 
