@@ -1,7 +1,6 @@
 import Popup from "./components/Popup";
 import {createUseStyles} from 'react-jss';
 import TonProvider from "./providers/TonProvider";
-import {Switch} from 'react-router-dom';
 import AccountProvider from "./providers/AccountProvider";
 import MemoryRouter from "./components/MemoryRouter";
 import Routes from "./Routes";
@@ -36,9 +35,7 @@ const App = () => {
                             <WalletsProvider>
                                 <Popup>
                                     <MemoryRouter>
-                                        <Switch>
-                                            <Routes/>
-                                        </Switch>
+                                        <Routes/>
                                     </MemoryRouter>
                                 </Popup>
                             </WalletsProvider>

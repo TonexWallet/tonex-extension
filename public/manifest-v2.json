@@ -9,7 +9,10 @@
     "default_title": "Tonex",
     "default_icon": {
       "16": "img/icon-16.png",
-      "48": "img/icon-48.png"
+      "48": "img/icon-48.png",
+      "128": "img/icon-128.png",
+      "512": "img/icon-512.png",
+      "512@2x": "img/icon-512@2x.png"
     }
   },
   "background": {
