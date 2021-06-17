@@ -15,12 +15,12 @@ const useStyles = createUseStyles({
         background: '#0085FF',
         color: '#fff',
         cursor: 'pointer',
-        borderRadius: 15,
+        borderRadius: 16,
         fontSize: '12px',
         lineHeight: '16px',
         fontWeight: 'bold',
         textDecoration: 'none',
-        padding: '0 8px',
+        padding: '0 16px',
 
         '&:disabled': {
             cursor: 'initial',

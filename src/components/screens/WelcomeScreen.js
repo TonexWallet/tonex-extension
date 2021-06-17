@@ -18,8 +18,10 @@ const useStyles = createUseStyles({
         display: 'flex',
         alignItem: 'center',
         flexDirection: 'column',
+        marginTop: 48,
+
         '&>*+*': {
-            marginTop: 64
+            marginTop: 54
         }
     },
 
@@ -28,12 +30,19 @@ const useStyles = createUseStyles({
         flexDirection: 'column',
         alignItems: 'center',
         maxWidth: 240,
+        marginTop: 46,
         '&>*': {
             textAlign: 'center'
         },
-        '&>*+*': {
-            marginTop: 16
-        }
+    },
+
+    infoText: {
+        marginTop: 16,
+    },
+
+    actionCreate:{
+        width: 190,
+        boxSizing: 'border-box'
     }
 });
 
@@ -47,11 +56,11 @@ const WelcomeScreen = () => {
                 <Typography variant={TypographyVariant.SUBHEADER} color={TypographyColor.PRIMARY}>
                     Welcome to Tonex!
                 </Typography>
-                <Typography variant={TypographyVariant.BODY} color={TypographyColor.PRIMARY}>
+                <Typography variant={TypographyVariant.BODY} color={TypographyColor.PRIMARY} className={classes.infoText}>
                     You can create your account or restore exists with seed phrase
                 </Typography>
                 <div className={classes.actionButtons}>
-                    <Button as={Link} to={'/account/create'}>Create new wallet</Button>
+                    <Button as={Link} to={'/account/create'} className={classes.actionCreate}>Create new wallet</Button>
 
                     <Button as={Link} link to={'/account/restore'}>Restore</Button>
                 </div>
