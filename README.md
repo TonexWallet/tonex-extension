@@ -7,10 +7,6 @@
 * Click "Load unpacked" button and choose unpacked build directory
 * Done
 
-## Contest
-
-Extension will be available in Chrome store and other browsers as soon as possible.
-
 ## Build from source
 
 Requirements: installed yarn or npm, nodejs.
