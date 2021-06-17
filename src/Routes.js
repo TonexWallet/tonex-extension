@@ -10,8 +10,17 @@ import CreateTransactionScreen from "./components/screens/CreateTransactionScree
 import ReceiveScreen from "./components/screens/ReceiveScreen";
 import SettingsScreen from "./components/screens/SettingsScreen";
 import {animated, useTransition} from "react-spring";
+import {createUseStyles} from "react-jss";
+
+const useStyles = createUseStyles({
+    animatedWrapper: {
+        width: '100%',
+        height: '100%',
+    }
+});
 
 const Routes = () => {
+    const classes = useStyles();
     const {initialized, locked} = useAccount();
     const {activeWallet} = useWallets();
 
@@ -24,13 +33,11 @@ const Routes = () => {
         },
         from: {
             opacity: 0,
-            width: '100%',
-            height: '100%',
         },
     });
 
     return transitions(({opacity, ...props}, item) => (
-        <animated.div style={{
+        <animated.div className={classes.animatedWrapper} style={{
             opacity,
             ...props,
             // transform: opacity.to({ range: [0, 1], output: [100, 0]}).to(y => `translate3d(${-y}px, 0, 0)`)
