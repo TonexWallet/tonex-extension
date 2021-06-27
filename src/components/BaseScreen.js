@@ -8,7 +8,7 @@ const useStyles = createUseStyles({
         display: 'flex',
         flexDirection: 'column',
         padding: 16,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
     },
 });
 

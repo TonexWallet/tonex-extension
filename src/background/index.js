@@ -40,7 +40,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     }
 
     const setupTonClient = ({network}) => {
-        console.log('setup client', network)
         if(!client){
             client = new TonClient( {
                 network: {
@@ -116,11 +115,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
                 });
             },
         });
-
-        console.log('post active wallet', activeWallet && {
-            ...activeWallet,
-            ...activeWalletData
-        })
 
         connection.postMessage({
             type: SUBSCRIPTION_TYPE.WALLET,
@@ -250,8 +244,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         try{
             let account = {};
 
-            console.log('unlocking...')
-
             try{
                 account = await deriveAccount(passcode);
             }catch (e){
@@ -260,12 +252,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
 
             const wallets = await getAccountWallets(account);
             const {activeWalletPath} = account;
-
-
-            console.log('unlocked. post message...', {
-                wallets,
-                activeWalletPath
-            })
 
             connection.postMessage({
                 type: EVENT_TYPE.ACCOUNT_UNLOCK,
@@ -423,7 +409,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
             payload: body,
         }));
 
-        console.log('transaction sent', transactionInfo)
         // const messages = transactionInfo.out_messages;
 
         connection && connection.postMessage({
@@ -483,8 +468,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
             }
         });
 
-        console.log('changed network to', network)
-
         connection.postMessage({
             type: SUBSCRIPTION_TYPE.TON,
             payload: {
@@ -495,7 +478,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     });
 
     connection.onDisconnect.addListener( () => {
-        console.log('Disconnect');
         connection = null;
     });
 

@@ -16,6 +16,9 @@ const useStyles = createUseStyles({
     animatedWrapper: {
         width: '100%',
         height: '100%',
+        position: 'absolute',
+        top: 0,
+        right: 0
     }
 });
 
@@ -35,8 +38,6 @@ const Routes = () => {
             opacity: 0,
         },
     });
-
-    console.log(initialized, locked, activeWallet)
 
     return transitions(({opacity, ...props}, item) => (
         <animated.div className={classes.animatedWrapper} style={{

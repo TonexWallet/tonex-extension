@@ -52,7 +52,6 @@ const SettingsScreen = () => {
                 <InputLabel>
                     Choose Network
                     <select value={activeNetwork} onChange={(e) => {
-                        console.log('changing network', e.target.value);
                         changeNetwork(e.target.value);
                     }}>
                         {AvailableNetworks.map(network => {

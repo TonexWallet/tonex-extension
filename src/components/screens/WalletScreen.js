@@ -5,6 +5,7 @@ import {useWallets} from "../../providers/WalletsProvider";
 import WalletActivate from "../WalletActivate";
 import Typography, {TypographyColor, TypographyVariant} from "../Typography";
 import Transactions from "../Transactions";
+import BaseScreen from "../BaseScreen";
 
 const WalletScreen = () => {
     const {activeWallet, wallets} = useWallets();
@@ -18,26 +19,23 @@ const WalletScreen = () => {
     }
 
     return (
-        <>
-            <Wrapper>
-                <WalletHeader activeWallet={activeWallet} wallets={wallets}/>
-            </Wrapper>
-            <Wrapper>
-                <WalletCard/>
-            </Wrapper>
-            {!activeWallet.initialized && (
-                <Wrapper>
-                    <WalletActivate/>
-                </Wrapper>
-            )}
-            <Wrapper>
-                <Typography variant={TypographyVariant.BODY} color={TypographyColor.PRIMARY}>
-                    Activity
-                </Typography>
+        <BaseScreen>
+            <WalletHeader activeWallet={activeWallet} wallets={wallets}/>
+            <WalletCard/>
 
-                <Transactions/>
-            </Wrapper>
-        </>
+            {!activeWallet.initialized && (
+                <>
+                    <br/>
+                    <WalletActivate/>
+                </>
+            )}
+            <br/>
+            <Typography variant={TypographyVariant.BODY} color={TypographyColor.PRIMARY}>
+                Activity
+            </Typography>
+
+            <Transactions/>
+        </BaseScreen>
     )
 };
 

@@ -30,7 +30,6 @@ const watchWallet = async ({client, wallet, onUpdate}) => {
     await stopWatch(client);
 
     const {handle: transactionsHandle} = (await client.net.subscribe_collection(walletTransactionsQuery(wallet), ({result: transaction}) => {
-        console.log('transaction received', transaction)
         if(!transaction || walletCache.transactions.find(item => item.id === transaction.id)){
            return;
         }
@@ -45,7 +44,6 @@ const watchWallet = async ({client, wallet, onUpdate}) => {
             transactions: walletCache.transactions,
         })
     }));
-    console.log('start watchings')
 
     const {handle: walletInfoHandle} = (await client.net.subscribe_collection(walletQuery(wallet), ({result: walletInfo}) => {
         walletCache.walletInfo = walletInfo;
@@ -62,8 +60,6 @@ const watchWallet = async ({client, wallet, onUpdate}) => {
         transactions: [] || (await client.net.query_collection(walletTransactionsQuery(wallet))).result,
         walletInfo: (await client.net.query_collection(walletQuery(wallet))).result[0]
     }
-
-    console.log('stop')
 
     return {
         transactions: walletCache.transactions,

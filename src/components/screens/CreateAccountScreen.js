@@ -5,6 +5,7 @@ import useModal from "../../hooks/useModal";
 import SeedPhraseModal from "../SeedPhraseModal";
 import SeedPhraseConfirmationModal from "../SeedPhraseConfirmationModal";
 import CreatePinPrompt from "../CreatePinPrompt";
+import BaseScreen from "../BaseScreen";
 
 const CreateAccountScreen = () => {
     const {createAccount, generateSeedPhrase} = useAccount();
@@ -36,7 +37,7 @@ const CreateAccountScreen = () => {
     }, []);
 
     return (
-        <div>
+        <BaseScreen>
             <CreatePinPrompt
                 isOpen={isOpenCretePin}
                 onCancel={() => {
@@ -66,7 +67,7 @@ const CreateAccountScreen = () => {
                     }}
                     seedPhrase={seedPhrase}/>
             </RenderSeedPhraseConfirmationModal>
-        </div>
+        </BaseScreen>
     )
 };
 
