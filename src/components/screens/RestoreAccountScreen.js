@@ -65,7 +65,7 @@ const RestoreAccountScreen = () => {
                     <BackArrowIcon/>
                 </IconButton>
             </Link>
-        )} className={classes.restoreAccountScreen}>
+        )}>
             <div className={classes.restoreForm}>
                 <Wrapper>
                     <Typography variant={TypographyVariant.SUBHEADER}>
