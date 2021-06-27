@@ -36,6 +36,8 @@ const Routes = () => {
         },
     });
 
+    console.log(initialized, locked, activeWallet)
+
     return transitions(({opacity, ...props}, item) => (
         <animated.div className={classes.animatedWrapper} style={{
             opacity,

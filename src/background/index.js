@@ -14,11 +14,7 @@ import transferAbi from '../contracts/Transfer/transfer.abi.json';
 import Big from "../lib/Big";
 import watchWallet from "./walletWatcher";
 import extensionApi from '../lib/ExtensionApi';
-import getLibWeb from "./libweb";
-// import {libWeb} from "@tonclient/lib-web";
-const libWeb = getLibWeb({
-    debugLog: console.log
-});
+import {libWeb} from "@tonclient/lib-web";
 
 TonClient.useBinaryLibrary(libWeb);
 
@@ -94,7 +90,7 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         const {wallets, activeWalletPath} = accountState;
         const activeWallet = wallets && wallets.find(wallet => wallet.hdPath === activeWalletPath);
 
-        const initialized = await getStoreValue('account');
+        const initialized = Boolean(await getStoreValue('account'));
 
         connection.postMessage({
             type: SUBSCRIPTION_TYPE.ACCOUNT,
@@ -120,6 +116,11 @@ extensionApi.runtime.onConnect.addListener(async connection => {
                 });
             },
         });
+
+        console.log('post active wallet', activeWallet && {
+            ...activeWallet,
+            ...activeWalletData
+        })
 
         connection.postMessage({
             type: SUBSCRIPTION_TYPE.WALLET,
@@ -249,6 +250,8 @@ extensionApi.runtime.onConnect.addListener(async connection => {
         try{
             let account = {};
 
+            console.log('unlocking...')
+
             try{
                 account = await deriveAccount(passcode);
             }catch (e){
@@ -258,17 +261,21 @@ extensionApi.runtime.onConnect.addListener(async connection => {
             const wallets = await getAccountWallets(account);
             const {activeWalletPath} = account;
 
+
+            console.log('unlocked. post message...', {
+                wallets,
+                activeWalletPath
+            })
+
             connection.postMessage({
                 type: EVENT_TYPE.ACCOUNT_UNLOCK,
                 payload: {}
             });
-
             await updateAccountState({
                 wallets,
                 activeWalletPath
             });
         }catch (e){
-            console.log(e);
             connection.postMessage({
                 type: EVENT_TYPE.ACCOUNT_UNLOCK,
                 error: {
@@ -497,14 +504,6 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     setupTonClient({network: activeNetwork});
 
     connection.postMessage({
-        type: SUBSCRIPTION_TYPE.TON,
-        payload: {
-            network: activeNetwork,
-            availableNetworks: AvailableNetworks
-        }
-    });
-
-    connection.postMessage({
         type: SUBSCRIPTION_TYPE.BACKGROUND,
         payload: {
             isReady: true
@@ -512,6 +511,14 @@ extensionApi.runtime.onConnect.addListener(async connection => {
     });
 
     await updateAccountState({});
+
+    connection.postMessage({
+        type: SUBSCRIPTION_TYPE.TON,
+        payload: {
+            network: activeNetwork,
+            availableNetworks: AvailableNetworks
+        }
+    });
 });
 
 extensionApi.runtime.onStartup.addListener(async () => {
