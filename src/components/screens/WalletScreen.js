@@ -1,4 +1,3 @@
-import Wrapper from "../Wrapper";
 import WalletHeader from "../WalletHeader";
 import WalletCard from "../WalletCard";
 import {useWallets} from "../../providers/WalletsProvider";

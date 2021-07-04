@@ -57,7 +57,7 @@ const watchWallet = async ({client, wallet, onUpdate}) => {
     subscriptionHandlers.walletInfo = walletInfoHandle;
 
     walletCache = {
-        transactions: [] || (await client.net.query_collection(walletTransactionsQuery(wallet))).result,
+        transactions: (await client.net.query_collection(walletTransactionsQuery(wallet))).result,
         walletInfo: (await client.net.query_collection(walletQuery(wallet))).result[0]
     }
 

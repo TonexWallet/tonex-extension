@@ -1,6 +1,7 @@
 import React from 'react'
 import {createPortal} from 'react-dom'
 import {createUseStyles} from 'react-jss';
+import {animated} from "react-spring";
 
 const useStyles = createUseStyles({
     modalRoot: {
@@ -14,16 +15,16 @@ const useStyles = createUseStyles({
     }
 });
 
-const Modal = React.memo(({ children, closeModal }) => {
+const Modal = React.memo(({ style, closeModal, children }) => {
     const classes = useStyles();
     const domEl = document.getElementById('modal-root');
 
     if (!domEl) return null
 
     return createPortal(
-        <div className={classes.modalRoot}>
+        <animated.div className={classes.modalRoot} style={style}>
             {children}
-        </div>,
+        </animated.div>,
         domEl
     )
 })
